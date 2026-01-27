@@ -12,9 +12,6 @@ export class TasksService {
     private readonly taskModel: Model<Task>,
   ) {}
 
-  // -------------------------------
-  // Create Task
-  // -------------------------------
   async create(createTaskDto: CreateTaskDto) {
     try {
       const task = new this.taskModel({
@@ -29,9 +26,6 @@ export class TasksService {
     }
   }
 
-  // -------------------------------
-  // Get All Tasks (with filters + pagination)
-  // -------------------------------
   async findAll(
     page = 1,
     limit = 10,
@@ -72,9 +66,6 @@ export class TasksService {
     };
   }
 
-  // -------------------------------
-  // Get Single Task
-  // -------------------------------
   async findOne(id: string) {
     if (!Types.ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid task id');
@@ -89,9 +80,6 @@ export class TasksService {
     return task;
   }
 
-  // -------------------------------
-  // Update Task
-  // -------------------------------
   async update(id: string, dto: UpdateTaskDto) {
     if (!Types.ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid task id');
@@ -110,16 +98,10 @@ export class TasksService {
     return task;
   }
 
-  // -------------------------------
-  // Mark as Completed
-  // -------------------------------
   async markCompleted(id: string) {
     return this.update(id, { completed: true });
   }
 
-  // -------------------------------
-  // Delete Task
-  // -------------------------------
   async delete(id: string) {
     if (!Types.ObjectId.isValid(id)) {
       throw new BadRequestException('Invalid task id');
